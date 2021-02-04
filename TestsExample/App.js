@@ -32,5 +32,5 @@ import Test765 from './src/Test765';
 enableScreens();
 
 export default function App() {
-  return <Test748 />;
+  return <Test42 />;
 }
