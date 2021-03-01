@@ -3,8 +3,16 @@ import { View, Button } from 'react-native';
 import { enableScreens } from 'react-native-screens';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createStackNavigator } from '@react-navigation/stack';
+import FastImage from 'react-native-fast-image'
 
 enableScreens();
+
+const IMAGES = {
+  A: "https://upload.wikimedia.org/wikipedia/commons/c/c2/Richard_Stallman_at_Marlboro_College.jpg",
+  B: "https://upload.wikimedia.org/wikipedia/commons/0/01/LinuxCon_Europe_Linus_Torvalds_03_%28cropped%29.jpg",
+  C: "https://static.goldenline.pl/user_photo/019/user_5194259_2e4dc8_huge.jpg",
+  D: "https://upload.wikimedia.org/wikipedia/commons/f/f5/Steve_Jobs_Headshot_2010-CROP2.jpg"
+}
 
 const DetailsScreen = ({ navigation, route }) => {
   useEffect(() => {
@@ -18,15 +26,13 @@ const DetailsScreen = ({ navigation, route }) => {
   };
 
   const index = getIndex();
+
   return (
     <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        title={`More details ${index}`}
-        onPress={() =>
-          navigation.push('Details', {
-            index: index + 1,
-          })
-        }
+      <FastImage
+          style={{ width: 200, height: 200 }}
+          source={{ uri: IMAGES[route.name], }}
+          resizeMode={FastImage.resizeMode.contain}
       />
     </View>
   );
@@ -53,10 +59,10 @@ const Tab = createBottomTabNavigator();
 
 const NavigationTabsAndStack = () => (
   <Tab.Navigator>
-    <Tab.Screen name="A" component={AStack} />
-    <Tab.Screen name="B" component={BStack} />
-    <Tab.Screen name="C" component={CStack} />
-    <Tab.Screen name="D" component={DStack} />
+    <Tab.Screen name="A" component={DetailsScreen} />
+    <Tab.Screen name="B" component={DetailsScreen} />
+    <Tab.Screen name="C" component={DetailsScreen} />
+    <Tab.Screen name="D" component={DetailsScreen} />
   </Tab.Navigator>
 );
 
